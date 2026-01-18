@@ -3,117 +3,300 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Sharique H — Data Science Portfolio</title>
+  <title>Sharique Haroon — Applied Data Science & ML</title>
 
   <style>
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 0 16px;
-      line-height: 1.6;
-      background: #0f172a;
-      color: #e5e7eb;
+    :root{
+      --bg:#0b1220;
+      --panel:rgba(2,6,23,.78);
+      --border:rgba(148,163,184,.18);
+      --text:#e5e7eb;
+      --muted:rgba(229,231,235,.72);
+      --link:#38bdf8;
+      --radius:18px;
+      --shadow:0 16px 50px rgba(0,0,0,.45);
     }
-    h1, h2, h3 { color: #f8fafc; }
-    a { color: #38bdf8; text-decoration: none; }
-    .card {
-      border: 1px solid #1e293b;
-      border-radius: 16px;
-      padding: 20px;
-      margin: 20px 0;
-      background: #020617;
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.6;
     }
-    .tag {
-      display: inline-block;
-      border: 1px solid #334155;
-      border-radius: 999px;
-      padding: 4px 12px;
-      margin: 6px 6px 0 0;
-      font-size: 12px;
-      color: #cbd5f5;
+
+    /* animated background */
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      z-index:-2;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(30,58,138,.55), transparent 45%),
+        radial-gradient(circle at 80% 70%, rgba(15,118,110,.55), transparent 50%),
+        linear-gradient(180deg,#020617,#071025 40%,#020617);
+      animation:floatBg 18s ease-in-out infinite alternate;
     }
-    .header {
-      margin-bottom: 40px;
+    body::after{
+      content:"";
+      position:fixed;
+      inset:0;
+      z-index:-1;
+      background-image:radial-gradient(rgba(56,189,248,.08) 1px,transparent 1px);
+      background-size:28px 28px;
+      opacity:.35;
+      pointer-events:none;
+      mask-image:radial-gradient(circle at 50% 30%,#000,transparent 65%);
+    }
+    @keyframes floatBg{
+      from{transform:translateY(0)}
+      to{transform:translateY(-40px)}
+    }
+
+    a{color:var(--link);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .container{max-width:1040px;margin:auto;padding:36px 18px 80px}
+
+    /* header */
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+    h1{margin:0;font-size:32px}
+    .headline{color:var(--muted);max-width:720px}
+
+    .actions{display:flex;gap:10px;flex-wrap:wrap}
+    .pill{
+      padding:8px 14px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:rgba(2,6,23,.55);
+      backdrop-filter:blur(10px);
+      transition:.2s;
+      font-size:13px;
+      cursor:pointer;
+    }
+    .pill:hover{transform:translateY(-2px);border-color:#38bdf8}
+
+    .nav{margin:24px 0;display:flex;gap:10px;flex-wrap:wrap}
+
+    /* cards */
+    .card{
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:22px;
+      box-shadow:var(--shadow);
+      transition:.25s;
+    }
+    .card:hover{transform:translateY(-4px);border-color:#38bdf8}
+
+    .tags{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+    .tag{
+      font-size:12px;
+      padding:4px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:rgba(2,6,23,.4);
+    }
+
+    ul{margin:10px 0 0 18px}
+    li{margin:6px 0;color:rgba(229,231,235,.88)}
+
+    /* featured */
+    .featured{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:18px;
+      padding:24px;
+      border-radius:22px;
+      border:1px solid rgba(56,189,248,.35);
+      background:linear-gradient(135deg,rgba(2,6,23,.85),rgba(2,6,23,.5));
+      box-shadow:0 20px 70px rgba(0,0,0,.6);
+      margin-bottom:36px;
+    }
+    .featured:hover{transform:translateY(-6px)}
+    .codebox{
+      font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+      font-size:12px;
+      white-space:pre;
+      opacity:.9;
+    }
+
+    /* scroll reveal */
+    .fade{opacity:0;transform:translateY(24px);transition:.7s}
+    .fade.visible{opacity:1;transform:none}
+
+    footer{text-align:center;margin-top:50px;font-size:12px;color:var(--muted)}
+
+    @media(max-width:900px){
+      .featured{grid-template-columns:1fr}
     }
   </style>
 </head>
 
 <body>
+<div class="container">
 
-  <div class="header">
-    <h1>Sharique H</h1>
-    <p>
-      Data Scientist / Data Engineer<br>
-      Applied ML • Industrial & Operations Analytics • Germany
-    </p>
-    <p>
-      <a href="https://github.com/ShariqueH">GitHub</a> ·
-      <a href="https://linkedin.com/">LinkedIn</a> ·
-      <a href="mailto:your@email.com">Email</a>
-    </p>
+  <!-- HEADER -->
+  <div class="topbar fade">
+    <div>
+      <h1 data-i18n="name">Sharique Haroon</h1>
+      <p class="headline" data-i18n="headline">
+        Applied Machine Learning • Data Products • Operations & Industrial Analytics
+      </p>
+    </div>
+    <div class="actions">
+      <a class="pill" href="https://github.com/ShariqueH" target="_blank">GitHub</a>
+      <a class="pill" href="https://www.linkedin.com/in/sharique-haroon/" target="_blank">LinkedIn</a>
+      <a class="pill" href="mailto:sharique.haroon@hotmail.com">Email</a>
+      <button class="pill" id="langToggle">EN → DE</button>
+    </div>
   </div>
 
-  <h2>Projects</h2>
+  <!-- NAV -->
+  <div class="nav fade">
+    <a class="pill" href="#featured" data-i18n="nav_featured">Featured</a>
+    <a class="pill" href="#projects" data-i18n="nav_projects">Projects</a>
+    <a class="pill" href="#about" data-i18n="nav_about">About</a>
+  </div>
 
-  <div class="card">
-    <h3>Data Buddy — Data Cleaning & Visualization Tool</h3>
-    <p>
-      Python-based application for cleaning messy datasets and generating quick insights.
+  <!-- FEATURED -->
+  <section id="featured" class="fade">
+    <div class="featured">
+      <div>
+        <h2 data-i18n="feat_title">Featured — Predictive Maintenance / Failure Risk</h2>
+        <p data-i18n="feat_desc">
+          End-to-end machine learning project predicting component failure risk,
+          framed around operational trade-offs rather than accuracy alone.
+        </p>
+        <div class="tags">
+          <span class="tag">Machine Learning</span>
+          <span class="tag">Python</span>
+          <span class="tag">Scikit-learn</span>
+          <span class="tag">Automotive</span>
+        </div>
+        <a class="pill" href="https://github.com/ShariqueH/Predicting-Car-Component-Failure" target="_blank">
+          View Repository →
+        </a>
+      </div>
+      <pre class="codebox">
+def predict_failure(x):
+    x = clean(x)
+    f = engineer_features(x)
+    p = model.predict_proba(f)[:,1]
+    return calibrate(p)
+█
+      </pre>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <h2 id="projects" class="fade" data-i18n="projects">Projects</h2>
+
+  <div class="card fade">
+    <h3 data-i18n="p2_title">Shipment Delay Risk Prediction</h3>
+    <p data-i18n="p2_desc">
+      Risk modeling project focused on predicting shipment delays using historical and operational data.
     </p>
-    <div>
+    <div class="tags">
       <span class="tag">Python</span>
-      <span class="tag">Pandas</span>
-      <span class="tag">Data Quality</span>
-      <span class="tag">Visualization</span>
+      <span class="tag">ML</span>
+      <span class="tag">Operations</span>
+      <span class="tag">Logistics</span>
     </div>
     <ul>
-      <li>Implemented missing-value handling, duplicate removal, and data summaries.</li>
-      <li>Designed UI-first workflow to reduce time-to-insight.</li>
+      <li data-i18n="p2_b1">Built features from operational timelines and event data.</li>
+      <li data-i18n="p2_b2">Evaluated models with emphasis on business-relevant error trade-offs.</li>
     </ul>
-    <p><a href="#">View Repository →</a></p>
+    <a href="https://github.com/ShariqueH/Shipment-delay-risk" target="_blank">
+      View Repository →
+    </a>
   </div>
 
-  <div class="card">
-    <h3>Bosch Production Line Analysis</h3>
-    <p>
-      End-to-end analysis of manufacturing data to identify bottlenecks and quality patterns.
+  <!-- ABOUT -->
+  <h2 id="about" class="fade" data-i18n="about">About</h2>
+
+  <div class="card fade">
+    <p data-i18n="a1">
+      Focused on applied machine learning and data products in operational and industrial contexts,
+      where robustness and decision impact matter more than theoretical complexity.
     </p>
-    <div>
-      <span class="tag">Python</span>
-      <span class="tag">EDA</span>
-      <span class="tag">Manufacturing</span>
-    </div>
-    <ul>
-      <li>Cleaned and explored production features at scale.</li>
-      <li>Derived actionable insights for process improvement.</li>
-    </ul>
-    <p><a href="#">View Repository →</a></p>
-  </div>
-
-  <div class="card">
-    <h3>Predicting Car Component Failure</h3>
-    <p>
-      Machine learning model to predict failures and support preventive maintenance.
+    <p data-i18n="a2">
+      Experience spans end-to-end data work: integrating messy real-world data, feature engineering,
+      model training and evaluation, and translating outputs into actionable operational insights.
     </p>
-    <div>
-      <span class="tag">Machine Learning</span>
-      <span class="tag">Scikit-learn</span>
-      <span class="tag">Automotive</span>
-    </div>
-    <ul>
-      <li>Built baseline and improved models with feature engineering.</li>
-      <li>Focused on recall/precision trade-offs relevant to maintenance.</li>
-    </ul>
-    <p><a href="#">View Repository →</a></p>
+    <p data-i18n="a3">
+      Background in systems and IT operations strongly shapes a pragmatic, reliability-driven approach
+      to data science beyond notebooks and demos.
+    </p>
   </div>
 
-  <h2>About Me</h2>
-  <p>
-    I am a Master’s student in Data Science with a strong focus on applied machine learning,
-    data engineering, and industrial analytics. I enjoy building practical data products
-    and well-documented analytical pipelines.
-  </p>
+  <footer class="fade">© 2026 — GitHub Pages</footer>
 
+</div>
+
+<script>
+  // scroll reveal
+  const obs=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add("visible")),{threshold:.15});
+  document.querySelectorAll(".fade").forEach(el=>obs.observe(el));
+
+  // bilingual
+  const t={
+    en:{
+      name:"Sharique Haroon",
+      headline:"Applied Machine Learning • Data Products • Operations & Industrial Analytics",
+      nav_featured:"Featured",
+      nav_projects:"Projects",
+      nav_about:"About",
+      feat_title:"Featured — Predictive Maintenance / Failure Risk",
+      feat_desc:"End-to-end machine learning project predicting component failure risk, framed around operational trade-offs rather than accuracy alone.",
+      projects:"Projects",
+      p2_title:"Shipment Delay Risk Prediction",
+      p2_desc:"Risk modeling project focused on predicting shipment delays using historical and operational data.",
+      p2_b1:"Built features from operational timelines and event data.",
+      p2_b2:"Evaluated models with emphasis on business-relevant error trade-offs.",
+      about:"About",
+      a1:"Focused on applied machine learning and data products in operational and industrial contexts, where robustness and decision impact matter more than theoretical complexity.",
+      a2:"Experience spans end-to-end data work: integrating messy real-world data, feature engineering, model training and evaluation, and translating outputs into actionable operational insights.",
+      a3:"Background in systems and IT operations strongly shapes a pragmatic, reliability-driven approach to data science beyond notebooks and demos."
+    },
+    de:{
+      name:"Sharique Haroon",
+      headline:"Applied Machine Learning • Data Products • Operations & Industrie-Analytics",
+      nav_featured:"Highlight",
+      nav_projects:"Projekte",
+      nav_about:"Über mich",
+      feat_title:"Highlight — Predictive Maintenance / Ausfallrisiko",
+      feat_desc:"End-to-End-ML-Projekt zur Vorhersage von Ausfallrisiken mit Fokus auf operative Trade-offs statt reiner Modellgenauigkeit.",
+      projects:"Projekte",
+      p2_title:"Vorhersage von Lieferverzögerungen",
+      p2_desc:"Risikomodellierung zur Prognose von Lieferverzögerungen auf Basis historischer und operativer Daten.",
+      p2_b1:"Feature Engineering aus operativen Zeitlinien und Ereignisdaten.",
+      p2_b2:"Modellevaluation mit Fokus auf geschäftsrelevante Fehlerkosten.",
+      about:"Über mich",
+      a1:"Fokus auf Applied Machine Learning und Data Products in operativen und industriellen Kontexten, in denen Robustheit und Entscheidungs-Impact entscheidend sind.",
+      a2:"End-to-End-Datenarbeit: Integration realer, unstrukturierter Daten, Feature Engineering, Modelltraining und Evaluation.",
+      a3:"Der Hintergrund in Systems- und IT-Operations prägt einen pragmatischen, zuverlässigkeitsorientierten Ansatz in der Data Science."
+    }
+  };
+
+  let lang="en";
+  const btn=document.getElementById("langToggle");
+  const apply=()=>document.querySelectorAll("[data-i18n]").forEach(e=>e.textContent=t[lang][e.dataset.i18n]);
+  apply();
+
+  btn.onclick=()=>{
+    lang=lang==="en"?"de":"en";
+    btn.textContent=lang==="en"?"EN → DE":"DE → EN";
+    apply();
+  };
+</script>
 </body>
 </html>
