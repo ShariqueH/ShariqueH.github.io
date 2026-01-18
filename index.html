@@ -77,13 +77,16 @@
       border-radius:999px;
       border:1px solid var(--border);
       background:rgba(2,6,23,.55);
+      color: rgba(229,231,235,.92);
       backdrop-filter:blur(10px);
       transition:.2s;
       font-size:13px;
       cursor:pointer;
     }
     .pill:hover{transform:translateY(-2px);border-color:#38bdf8}
+    .pill:active{transform:translateY(0)}
 
+    /* nav */
     .nav{margin:24px 0;display:flex;gap:10px;flex-wrap:wrap}
 
     /* cards */
@@ -97,6 +100,11 @@
     }
     .card:hover{transform:translateY(-4px);border-color:#38bdf8}
 
+    .section-title{
+      margin: 34px 0 14px;
+      font-size: 22px;
+    }
+
     .tags{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
     .tag{
       font-size:12px;
@@ -108,26 +116,19 @@
 
     ul{margin:10px 0 0 18px}
     li{margin:6px 0;color:rgba(229,231,235,.88)}
+    .meta{margin:6px 0 0;color:var(--muted);font-size:13px}
 
-    /* featured */
+    /* featured (no code snippet) */
     .featured{
-      display:grid;
-      grid-template-columns:1.2fr .8fr;
-      gap:18px;
       padding:24px;
       border-radius:22px;
       border:1px solid rgba(56,189,248,.35);
       background:linear-gradient(135deg,rgba(2,6,23,.85),rgba(2,6,23,.5));
       box-shadow:0 20px 70px rgba(0,0,0,.6);
-      margin-bottom:36px;
+      margin-bottom:28px;
+      transition:.25s;
     }
-    .featured:hover{transform:translateY(-6px)}
-    .codebox{
-      font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-      font-size:12px;
-      white-space:pre;
-      opacity:.9;
-    }
+    .featured:hover{transform:translateY(-6px);border-color:rgba(56,189,248,.55)}
 
     /* scroll reveal */
     .fade{opacity:0;transform:translateY(24px);transition:.7s}
@@ -135,8 +136,10 @@
 
     footer{text-align:center;margin-top:50px;font-size:12px;color:var(--muted)}
 
+    .grid{display:grid;grid-template-columns:1fr;gap:18px}
+
     @media(max-width:900px){
-      .featured{grid-template-columns:1fr}
+      .container{padding:28px 14px 70px}
     }
   </style>
 </head>
@@ -153,10 +156,10 @@
       </p>
     </div>
     <div class="actions">
-      <a class="pill" href="https://github.com/ShariqueH" target="_blank">GitHub</a>
-      <a class="pill" href="https://www.linkedin.com/in/sharique-haroon/" target="_blank">LinkedIn</a>
+      <a class="pill" href="https://github.com/ShariqueH" target="_blank" rel="noreferrer">GitHub</a>
+      <a class="pill" href="https://www.linkedin.com/in/sharique-haroon/" target="_blank" rel="noreferrer">LinkedIn</a>
       <a class="pill" href="mailto:sharique.haroon@hotmail.com">Email</a>
-      <button class="pill" id="langToggle">EN → DE</button>
+      <button class="pill" id="langToggle" type="button">EN → DE</button>
     </div>
   </div>
 
@@ -164,65 +167,125 @@
   <div class="nav fade">
     <a class="pill" href="#featured" data-i18n="nav_featured">Featured</a>
     <a class="pill" href="#projects" data-i18n="nav_projects">Projects</a>
+    <a class="pill" href="#experience" data-i18n="nav_experience">Experience</a>
+    <a class="pill" href="#certifications" data-i18n="nav_certs">Certifications</a>
     <a class="pill" href="#about" data-i18n="nav_about">About</a>
   </div>
 
   <!-- FEATURED -->
   <section id="featured" class="fade">
     <div class="featured">
-      <div>
-        <h2 data-i18n="feat_title">Featured — Predictive Maintenance / Failure Risk</h2>
-        <p data-i18n="feat_desc">
-          End-to-end machine learning project predicting component failure risk,
-          framed around operational trade-offs rather than accuracy alone.
-        </p>
-        <div class="tags">
-          <span class="tag">Machine Learning</span>
-          <span class="tag">Python</span>
-          <span class="tag">Scikit-learn</span>
-          <span class="tag">Automotive</span>
-        </div>
-        <a class="pill" href="https://github.com/ShariqueH/Predicting-Car-Component-Failure" target="_blank">
-          View Repository →
-        </a>
+      <h2 data-i18n="feat_title">Featured — Predictive Maintenance / Failure Risk</h2>
+      <p data-i18n="feat_desc">
+        End-to-end machine learning project predicting component failure risk, framed around operational
+        trade-offs rather than accuracy alone.
+      </p>
+      <div class="tags">
+        <span class="tag">Machine Learning</span>
+        <span class="tag">Python</span>
+        <span class="tag">Scikit-learn</span>
+        <span class="tag">Automotive</span>
       </div>
-      <pre class="codebox">
-def predict_failure(x):
-    x = clean(x)
-    f = engineer_features(x)
-    p = model.predict_proba(f)[:,1]
-    return calibrate(p)
-█
-      </pre>
+      <a class="pill" href="https://github.com/ShariqueH/Predicting-Car-Component-Failure" target="_blank" rel="noreferrer">
+        <span data-i18n="view_repo_arrow">View Repository →</span>
+      </a>
     </div>
   </section>
 
   <!-- PROJECTS -->
-  <h2 id="projects" class="fade" data-i18n="projects">Projects</h2>
-
-  <div class="card fade">
-    <h3 data-i18n="p2_title">Shipment Delay Risk Prediction</h3>
-    <p data-i18n="p2_desc">
-      Risk modeling project focused on predicting shipment delays using historical and operational data.
-    </p>
-    <div class="tags">
-      <span class="tag">Python</span>
-      <span class="tag">ML</span>
-      <span class="tag">Operations</span>
-      <span class="tag">Logistics</span>
+  <h2 id="projects" class="section-title fade" data-i18n="projects">Projects</h2>
+  <div class="grid">
+    <div class="card fade">
+      <h3 data-i18n="p2_title">Shipment Delay Risk Prediction</h3>
+      <p class="meta" data-i18n="p2_desc">
+        Risk modeling project focused on predicting shipment delays using historical and operational data.
+      </p>
+      <div class="tags">
+        <span class="tag">Python</span>
+        <span class="tag">ML</span>
+        <span class="tag">Operations</span>
+        <span class="tag">Logistics</span>
+      </div>
+      <ul>
+        <li data-i18n="p2_b1">Built features from operational timelines and event data.</li>
+        <li data-i18n="p2_b2">Evaluated models with emphasis on business-relevant error trade-offs.</li>
+      </ul>
+      <p>
+        <a href="https://github.com/ShariqueH/Shipment-delay-risk" target="_blank" rel="noreferrer" data-i18n="view_repo_arrow">
+          View Repository →
+        </a>
+      </p>
     </div>
-    <ul>
-      <li data-i18n="p2_b1">Built features from operational timelines and event data.</li>
-      <li data-i18n="p2_b2">Evaluated models with emphasis on business-relevant error trade-offs.</li>
-    </ul>
-    <a href="https://github.com/ShariqueH/Shipment-delay-risk" target="_blank">
-      View Repository →
-    </a>
+  </div>
+
+  <!-- EXPERIENCE -->
+  <h2 id="experience" class="section-title fade" data-i18n="exp_title">Experience</h2>
+  <div class="grid">
+
+    <div class="card fade">
+      <h3 data-i18n="e1_title">IT Administrator — Razor Group</h3>
+      <p class="meta" data-i18n="e1_meta">Berlin · 2023–2024</p>
+      <ul>
+        <li data-i18n="e1_b1">Supported data-relevant systems in a high-volume e-commerce environment (SQL databases, operational workflows).</li>
+        <li data-i18n="e1_b2">Automated recurring data/system processes using Python and PowerShell to improve reliability of reporting and tooling.</li>
+        <li data-i18n="e1_b3">Collaborated with analytics, ops, and engineering to maintain data availability, consistency, and stability.</li>
+      </ul>
+    </div>
+
+    <div class="card fade">
+      <h3 data-i18n="e2_title">Data Analyst Intern — Eutech Cybernetics</h3>
+      <p class="meta" data-i18n="e2_meta">Remote (Dubai) · 2023</p>
+      <ul>
+        <li data-i18n="e2_b1">Built and maintained SQL-based analytical datasets across multiple business systems.</li>
+        <li data-i18n="e2_b2">Designed dashboards (Power BI, Tableau) to support data-driven decisions.</li>
+        <li data-i18n="e2_b3">Automated data validation workflows to improve data quality and reduce reporting friction.</li>
+      </ul>
+    </div>
+
+    <div class="card fade">
+      <h3 data-i18n="e3_title">UX/UI Designer (Student) — Safety io</h3>
+      <p class="meta" data-i18n="e3_meta">Berlin · 2022–2023</p>
+      <ul>
+        <li data-i18n="e3_b1">Collaborated with product, engineering, and IT teams in a Scrum-based environment.</li>
+        <li data-i18n="e3_b2">Supported migration of internal design workflows from Sketch to Figma to improve cross-team collaboration.</li>
+        <li data-i18n="e3_b3">Used usability testing and workflow analysis to guide iterative product improvements.</li>
+      </ul>
+    </div>
+
+    <div class="card fade">
+      <h3 data-i18n="e4_title">Radio Frequency Management & Virtual Machines — LS telecom (Internship)</h3>
+      <p class="meta" data-i18n="e4_meta">UAE · 2016</p>
+      <ul>
+        <li data-i18n="e4_b1">Supported IT and systems operations (installation, configuration, maintenance of Windows-based systems).</li>
+        <li data-i18n="e4_b2">Assisted with deployment and management of virtual machines using VMware.</li>
+        <li data-i18n="e4_b3">Performed basic troubleshooting of networked devices, servers, and end-user systems.</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- CERTIFICATIONS -->
+  <h2 id="certifications" class="section-title fade" data-i18n="certs_title">Certifications</h2>
+  <div class="grid">
+    <div class="card fade">
+      <h3 data-i18n="c1_title">eJPT — Junior Penetration Tester (INE)</h3>
+      <p class="meta" data-i18n="c1_meta">Issued Aug 2025 · Expires Aug 2028</p>
+      <p data-i18n="c1_desc">
+        Practical certification covering host and network auditing, service enumeration, and foundational penetration testing.
+      </p>
+    </div>
+
+    <div class="card fade">
+      <h3 data-i18n="c2_title">Complete Web & Mobile Designer: UI/UX (Figma)</h3>
+      <p class="meta" data-i18n="c2_meta">Issued Jun 2022</p>
+      <p data-i18n="c2_desc">
+        UI/UX fundamentals including wireframing, prototyping, and design systems in Figma.
+      </p>
+    </div>
   </div>
 
   <!-- ABOUT -->
-  <h2 id="about" class="fade" data-i18n="about">About</h2>
-
+  <h2 id="about" class="section-title fade" data-i18n="about">About</h2>
   <div class="card fade">
     <p data-i18n="a1">
       Focused on applied machine learning and data products in operational and industrial contexts,
@@ -244,7 +307,10 @@ def predict_failure(x):
 
 <script>
   // scroll reveal
-  const obs=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add("visible")),{threshold:.15});
+  const obs=new IntersectionObserver(
+    e=>e.forEach(x=>x.isIntersecting && x.target.classList.add("visible")),
+    {threshold:.15}
+  );
   document.querySelectorAll(".fade").forEach(el=>obs.observe(el));
 
   // bilingual
@@ -254,14 +320,45 @@ def predict_failure(x):
       headline:"Applied Machine Learning • Data Products • Operations & Industrial Analytics",
       nav_featured:"Featured",
       nav_projects:"Projects",
+      nav_experience:"Experience",
+      nav_certs:"Certifications",
       nav_about:"About",
       feat_title:"Featured — Predictive Maintenance / Failure Risk",
       feat_desc:"End-to-end machine learning project predicting component failure risk, framed around operational trade-offs rather than accuracy alone.",
+      view_repo_arrow:"View Repository →",
       projects:"Projects",
       p2_title:"Shipment Delay Risk Prediction",
       p2_desc:"Risk modeling project focused on predicting shipment delays using historical and operational data.",
       p2_b1:"Built features from operational timelines and event data.",
       p2_b2:"Evaluated models with emphasis on business-relevant error trade-offs.",
+      exp_title:"Experience",
+      e1_title:"IT Administrator — Razor Group",
+      e1_meta:"Berlin · 2023–2024",
+      e1_b1:"Supported data-relevant systems in a high-volume e-commerce environment (SQL databases, operational workflows).",
+      e1_b2:"Automated recurring data/system processes using Python and PowerShell to improve reliability of reporting and tooling.",
+      e1_b3:"Collaborated with analytics, ops, and engineering to maintain data availability, consistency, and stability.",
+      e2_title:"Data Analyst Intern — Eutech Cybernetics",
+      e2_meta:"Remote (Dubai) · 2023",
+      e2_b1:"Built and maintained SQL-based analytical datasets across multiple business systems.",
+      e2_b2:"Designed dashboards (Power BI, Tableau) to support data-driven decisions.",
+      e2_b3:"Automated data validation workflows to improve data quality and reduce reporting friction.",
+      e3_title:"UX/UI Designer (Student) — Safety io",
+      e3_meta:"Berlin · 2022–2023",
+      e3_b1:"Collaborated with product, engineering, and IT teams in a Scrum-based environment.",
+      e3_b2:"Supported migration of internal design workflows from Sketch to Figma to improve cross-team collaboration.",
+      e3_b3:"Used usability testing and workflow analysis to guide iterative product improvements.",
+      e4_title:"Radio Frequency Management & Virtual Machines — LS telecom (Internship)",
+      e4_meta:"UAE · 2016",
+      e4_b1:"Supported IT and systems operations (installation, configuration, maintenance of Windows-based systems).",
+      e4_b2:"Assisted with deployment and management of virtual machines using VMware.",
+      e4_b3:"Performed basic troubleshooting of networked devices, servers, and end-user systems.",
+      certs_title:"Certifications",
+      c1_title:"eJPT — Junior Penetration Tester (INE)",
+      c1_meta:"Issued Aug 2025 · Expires Aug 2028",
+      c1_desc:"Practical certification covering host and network auditing, service enumeration, and foundational penetration testing.",
+      c2_title:"Complete Web & Mobile Designer: UI/UX (Figma)",
+      c2_meta:"Issued Jun 2022",
+      c2_desc:"UI/UX fundamentals including wireframing, prototyping, and design systems in Figma.",
       about:"About",
       a1:"Focused on applied machine learning and data products in operational and industrial contexts, where robustness and decision impact matter more than theoretical complexity.",
       a2:"Experience spans end-to-end data work: integrating messy real-world data, feature engineering, model training and evaluation, and translating outputs into actionable operational insights.",
@@ -272,29 +369,67 @@ def predict_failure(x):
       headline:"Applied Machine Learning • Data Products • Operations & Industrie-Analytics",
       nav_featured:"Highlight",
       nav_projects:"Projekte",
+      nav_experience:"Erfahrung",
+      nav_certs:"Zertifikate",
       nav_about:"Über mich",
       feat_title:"Highlight — Predictive Maintenance / Ausfallrisiko",
-      feat_desc:"End-to-End-ML-Projekt zur Vorhersage von Ausfallrisiken mit Fokus auf operative Trade-offs statt reiner Modellgenauigkeit.",
+      feat_desc:"End-to-End-ML-Projekt zur Vorhersage von Ausfallrisiken – mit Fokus auf operative Trade-offs statt reiner Modellgenauigkeit.",
+      view_repo_arrow:"Repository ansehen →",
       projects:"Projekte",
       p2_title:"Vorhersage von Lieferverzögerungen",
       p2_desc:"Risikomodellierung zur Prognose von Lieferverzögerungen auf Basis historischer und operativer Daten.",
       p2_b1:"Feature Engineering aus operativen Zeitlinien und Ereignisdaten.",
       p2_b2:"Modellevaluation mit Fokus auf geschäftsrelevante Fehlerkosten.",
+      exp_title:"Erfahrung",
+      e1_title:"IT Administrator — Razor Group",
+      e1_meta:"Berlin · 2023–2024",
+      e1_b1:"Betrieb datenrelevanter Systeme in einem High-Volume E-Commerce Umfeld (SQL-Datenbanken, operative Workflows).",
+      e1_b2:"Wiederkehrende Daten-/Systemprozesse mit Python und PowerShell automatisiert, um Reporting und Tooling robuster zu machen.",
+      e1_b3:"Mit Analytics, Ops und Engineering zusammengearbeitet, um Datenverfügbarkeit, Konsistenz und Stabilität sicherzustellen.",
+      e2_title:"Data Analyst Praktikum — Eutech Cybernetics",
+      e2_meta:"Remote (Dubai) · 2023",
+      e2_b1:"SQL-basierte Analytical Datasets aus mehreren Business-Systemen aufgebaut und gepflegt.",
+      e2_b2:"Dashboards (Power BI, Tableau) entwickelt zur Unterstützung datenbasierter Entscheidungen.",
+      e2_b3:"Data-Validation-Workflows automatisiert, Datenqualität erhöht und Reporting-Reibung reduziert.",
+      e3_title:"UX/UI Designer (Student) — Safety io",
+      e3_meta:"Berlin · 2022–2023",
+      e3_b1:"Mit Produkt, Engineering und IT in einem Scrum-Umfeld zusammengearbeitet.",
+      e3_b2:"Migration interner Design-Workflows von Sketch zu Figma unterstützt, Zusammenarbeit verbessert.",
+      e3_b3:"Usability-Tests und Workflow-Analysen genutzt, um iterative Produktverbesserungen abzuleiten.",
+      e4_title:"Radio Frequency Management & Virtual Machines — LS telecom (Praktikum)",
+      e4_meta:"VAE · 2016",
+      e4_b1:"IT- und Systems-Operations unterstützt (Installation, Konfiguration, Wartung von Windows-Systemen).",
+      e4_b2:"Bei Deployment und Management von Virtual Machines mit VMware unterstützt.",
+      e4_b3:"Grundlegendes Troubleshooting von Netzwerkgeräten, Servern und End-User-Systemen durchgeführt.",
+      certs_title:"Zertifikate",
+      c1_title:"eJPT — Junior Penetration Tester (INE)",
+      c1_meta:"Ausgestellt Aug 2025 · Gültig bis Aug 2028",
+      c1_desc:"Praxiszertifikat zu Host-/Network Auditing, Service Enumeration und grundlegenden Penetration-Testing-Konzepten.",
+      c2_title:"Complete Web & Mobile Designer: UI/UX (Figma)",
+      c2_meta:"Ausgestellt Jun 2022",
+      c2_desc:"UI/UX Grundlagen inkl. Wireframing, Prototyping und Design Systems in Figma.",
       about:"Über mich",
-      a1:"Fokus auf Applied Machine Learning und Data Products in operativen und industriellen Kontexten, in denen Robustheit und Entscheidungs-Impact entscheidend sind.",
-      a2:"End-to-End-Datenarbeit: Integration realer, unstrukturierter Daten, Feature Engineering, Modelltraining und Evaluation.",
-      a3:"Der Hintergrund in Systems- und IT-Operations prägt einen pragmatischen, zuverlässigkeitsorientierten Ansatz in der Data Science."
+      a1:"Fokus auf Applied Machine Learning und Data Products in operativen und industriellen Kontexten, in denen Robustheit und Entscheidungs-Impact wichtiger sind als theoretische Komplexität.",
+      a2:"End-to-End-Datenarbeit: Integration realer, unstrukturierter Daten, Feature Engineering, Modelltraining und Evaluation sowie Übersetzung der Ergebnisse in operative Entscheidungen.",
+      a3:"Der Background in Systems- und IT-Operations prägt einen pragmatischen, zuverlässigkeitsorientierten Ansatz – auch außerhalb von Notebooks und Demos."
     }
   };
 
   let lang="en";
   const btn=document.getElementById("langToggle");
-  const apply=()=>document.querySelectorAll("[data-i18n]").forEach(e=>e.textContent=t[lang][e.dataset.i18n]);
+
+  function apply(){
+    document.documentElement.lang = lang;
+    document.querySelectorAll("[data-i18n]").forEach(e=>{
+      const key = e.dataset.i18n;
+      if(t[lang][key]) e.textContent = t[lang][key];
+    });
+    btn.textContent = (lang==="en") ? "EN → DE" : "DE → EN";
+  }
   apply();
 
   btn.onclick=()=>{
-    lang=lang==="en"?"de":"en";
-    btn.textContent=lang==="en"?"EN → DE":"DE → EN";
+    lang = (lang==="en") ? "de" : "en";
     apply();
   };
 </script>
